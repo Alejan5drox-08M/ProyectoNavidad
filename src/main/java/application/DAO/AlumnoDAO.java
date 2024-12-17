@@ -25,7 +25,7 @@ public class AlumnoDAO extends ConexionDAO {
         return alumnos;
     }
 
-    public List<Alumnos> listarAlumnosByExp(String numero_expediente) {
+    public List<Alumnos> listarAlumnosByExp(int numero_expediente) {
         List<Alumnos> alumnos = new ArrayList<>();
         try {
             session.beginTransaction();

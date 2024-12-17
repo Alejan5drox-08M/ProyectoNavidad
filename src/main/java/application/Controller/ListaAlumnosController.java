@@ -103,15 +103,15 @@ public class ListaAlumnosController extends SuperController {
     }
 
     private void cargarAlumnos() {
-        int paginas = 1;
+        int paginas =1;
 
         alumnosList = FXCollections.observableArrayList(alumnos);
         LaTabla.setItems(alumnosList);
 
-        if (alumnos.size() == 0) {
+        if (alumnos.size()%filaporPagina() == 0) {
             paginas = alumnos.size() / filaporPagina();
         } else if (alumnos.size() > filaporPagina()) {
-            paginas = alumnos.size() / filaporPagina();
+            paginas = alumnos.size() / filaporPagina()+1;
         }
         pagination.setPageCount(paginas);
         pagination.setCurrentPageIndex(0);
@@ -127,7 +127,7 @@ public class ListaAlumnosController extends SuperController {
         if (Objects.equals(BuscarNumeroExpediente.getText(), "")) {
             alumnos = alumnoDAO.listarAlumnos();
         } else {
-            alumnos = alumnoDAO.listarAlumnosByExp(BuscarNumeroExpediente.getText());
+            alumnos = alumnoDAO.listarAlumnosByExp(Integer.parseInt(BuscarNumeroExpediente.getText()));
         }
         cargarAlumnos();
         vaciarCampos();
